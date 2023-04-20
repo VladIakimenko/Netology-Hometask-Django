@@ -101,7 +101,11 @@ WSGI_APPLICATION = 'main.wsgi.application'
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
+<<<<<<< HEAD:2.1-databases/work_with_database/main/settings.py
 LANGUAGE_CODE = 'en-us'
+=======
+LANGUAGE_CODE = 'ru-ru'
+>>>>>>> 74fe02a (first_project):creating-project/application/app/settings.py
 
 TIME_ZONE = 'UTC'
 
