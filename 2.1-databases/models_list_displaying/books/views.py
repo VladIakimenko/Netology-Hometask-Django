@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from books.models import Book
-from django.core.paginator import Paginator
 
 
 def index_view(request):
