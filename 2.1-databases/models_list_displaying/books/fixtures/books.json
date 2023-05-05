@@ -1,0 +1,92 @@
+[
+  {
+    "model": "books.book",
+    "pk": 1,
+    "fields": {
+      "name": "Война и мир",
+      "author": "Ф.Д. Достоевский",
+      "pub_date": "2018-02-27"
+      }
+  },
+  {
+    "model": "books.book",
+    "pk": 2,
+    "fields": {
+      "name": "1984",
+      "author": "Джордж Оруэл",
+      "pub_date": "2016-12-06"
+      }
+  },
+  { 
+    "model": "books.book",
+    "pk": 3,
+    "fields": {
+      "name": "Убить пересмешника",
+      "author": "Харпер Ли",
+      "pub_date": "1960-07-11"
+      }  
+  },  
+  { 
+    "model": "books.book",
+    "pk": 4,
+    "fields": {
+      "name": "Мастер и Маргарита",
+      "author": "Михаил Булгаков",      
+      "pub_date": "1967-01-10"    
+      }  
+  },  
+  {    
+    "model": "books.book",    
+    "pk": 5,    
+    "fields": {      
+      "name": "Алиса в Стране чудес",      
+      "author": "Льюис Кэрролл",      
+      "pub_date": "1865-11-26"    
+      }  
+   },  
+   {    
+     "model": "books.book",    
+     "pk": 6,    
+     "fields": {      
+       "name": "Поющие в терновнике",      
+       "author": "Колин Маккалоу",      
+       "pub_date": "1958-01-09"    
+       }  
+   },  
+   {    
+     "model": "books.book",    
+     "pk": 7,    
+     "fields": {     
+       "name": "Цветы для Элджернона",      
+       "author": "Дэниел Киз",      
+       "pub_date": "1959-01-18"    
+       }  
+   },  
+   {    
+     "model": "books.book",    
+     "pk": 8,    
+     "fields": {      
+       "name": "Приключения Шерлока Холмса",      
+       "author": "Артур Конан Дойл",      
+       "pub_date": "1927-08-01"    
+       }  
+   },  
+   {    
+     "model": "books.book",    
+     "pk": 9,    
+     "fields": {      
+       "name": "Девушка с татуировкой дракона",      
+       "author": "Стиг Ларссон",      
+       "pub_date": "2005-08-19"    
+       }  
+   },  
+   {    
+     "model": "books.book",    
+     "pk": 10,    
+     "fields": {      
+       "name": "Магнат",      
+       "author": "Джон Фаулз",      
+       "pub_date": "1965-01-16"    
+       }  
+   }
+]

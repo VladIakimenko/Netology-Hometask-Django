@@ -1,0 +1,9 @@
+SECRET_KEY=thn+&t-%s0=7!zo_d1ovp*(b%p&$0uoxp&7b$xeukov_i-oe5#
+
+POSTGRES_DB=
+POSTGRES_USER=
+POSTGRES_PASSWORD=
+HOST=localhost
+PORT=5432
+
+DEBUG=true		

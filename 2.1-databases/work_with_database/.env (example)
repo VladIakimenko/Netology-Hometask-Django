@@ -1,0 +1,9 @@
+SECRET_KEY=0cir6)b-3&nij^mfa%7&)7e(i(eaiy8at3cgzen3*!3+1)p)0c
+
+POSTGRES_DB=
+POSTGRES_USER=
+POSTGRES_PASSWORD=
+HOST=localhost
+PORT=5432
+
+DEBUG=true		
