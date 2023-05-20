@@ -1,0 +1,9 @@
+SECRET_KEY=django-insecure-9m2%u2yq=+#)6c#^j7^1p+@mpiob-r)9ki+zrv%*ad779fz89l
+DEBUG=true
+ALLOWED_HOSTS=localhost 127.0.0.1
+
+POSTGRES_DB='netology_smart_home'
+POSTGRES_USER=
+POSTGRES_PASSWORD=
+HOST=localhost
+PORT=5432

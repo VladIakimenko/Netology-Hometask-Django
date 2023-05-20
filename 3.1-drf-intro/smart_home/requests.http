@@ -1,15 +1,18 @@
 # примеры API-запросов
 
-@baseUrl = http://localhost:8000/api
+#@baseUrl = http://localhost:8000/api
+# VARIABLE SUBSTITUTION DOESN'T SEEM TO WORK IN PYCHARM?
 
 # получение датчиков
-GET {{baseUrl}}/sensors/
+#GET {{baseUrl}}/sensors/
+GET http://localhost:8000/api/sensors/
 Content-Type: application/json
 
 ###
 
-# создание датчика
-POST {{baseUrl}}/sensors/
+# создание датчиков
+#POST {{baseUrl}}/sensors/
+POST http://localhost:8000/api/sensors/
 Content-Type: application/json
 
 {
@@ -18,9 +21,28 @@ Content-Type: application/json
 }
 
 ###
+POST http://localhost:8000/api/sensors/
+Content-Type: application/json
+
+{
+  "name": "JWS12-3",
+  "description": "Датчик в ванной над колонкой"
+}
+
+###
+POST http://localhost:8000/api/sensors/
+Content-Type: application/json
+
+{
+  "name": "WSG-31-gtx",
+  "description": "Датчик в прихожей над дверью"
+}
+
+###
 
 # обновление датчика
-PATCH {{baseUrl}}/sensors/1/
+#PATCH {{baseUrl}}/sensors/1/
+PATCH http://localhost:8000/api/sensors/1/
 Content-Type: application/json
 
 {
@@ -30,7 +52,8 @@ Content-Type: application/json
 ###
 
 # добавление измерения
-POST {{baseUrl}}/measurements/
+#POST {{baseUrl}}/measurements/
+POST http://localhost:8000/api/measurements/
 Content-Type: application/json
 
 {
@@ -40,6 +63,86 @@ Content-Type: application/json
 
 ###
 
+POST http://localhost:8000/api/measurements/
+Content-Type: application/json
+
+{
+  "sensor": 1,
+  "temperature": 22.4
+}
+
+###
+
+POST http://localhost:8000/api/measurements/
+Content-Type: application/json
+
+{
+  "sensor": 1,
+  "temperature": 22.2
+}
+
+###
+
+POST http://localhost:8000/api/measurements/
+Content-Type: application/json
+
+{
+  "sensor": 2,
+  "temperature": 21.3
+}
+
+###
+
+POST http://localhost:8000/api/measurements/
+Content-Type: application/json
+
+{
+  "sensor": 2,
+  "temperature": 22.0
+}
+
+###
+
+POST http://localhost:8000/api/measurements/
+Content-Type: application/json
+
+{
+  "sensor": 2,
+  "temperature": 21.1
+}
+
+###
+
+POST http://localhost:8000/api/measurements/
+Content-Type: application/json
+
+{
+  "sensor": 3,
+  "temperature": 25.3
+}
+
+###
+
+POST http://localhost:8000/api/measurements/
+Content-Type: application/json
+
+{
+  "sensor": 3,
+  "temperature": 25.5
+}
+
+###
+
+POST http://localhost:8000/api/measurements/
+Content-Type: application/json
+
+{
+  "sensor": 3,
+  "temperature": 25.0
+}
+
+###
 # получение информации по датчику
-GET {{baseUrl}}/sensors/1/
+#GET {{baseUrl}}/sensors/1/
+http://localhost:8000/api/sensors/1/
 Content-Type: application/json
