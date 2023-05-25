@@ -1,14 +1,34 @@
 # примеры API-запросов
 
-@baseUrl = http://localhost:8000/api/v1
+#@baseUrl = http://localhost:8000/api/v1     # DEFINED AT: http-client.env.json, 'dev' environment
 
-# создание продукта
+# создание продуктов
 POST {{baseUrl}}/products/
 Content-Type: application/json
 
 {
   "title": "Помидор",
   "description": "Лучшие помидоры на рынке"
+}
+
+###
+
+POST {{baseUrl}}/products/
+Content-Type: application/json
+
+{
+  "title": "Яблоко",
+  "description": "Старые, червивые, на компот потянет"
+}
+
+###
+
+POST {{baseUrl}}/products/
+Content-Type: application/json
+
+{
+  "title": "Апельсин",
+  "description": "Много нас, а он - один!"
 }
 
 ###
@@ -41,12 +61,18 @@ Content-Type: application/json
 
 ###
 
+# поиск продуктов по описанию
+GET {{baseUrl}}/products/?search=компот
+Content-Type: application/json
+
+
+###
 # создание склада
 POST {{baseUrl}}/stocks/
 Content-Type: application/json
 
 {
-  "address": "мой адрес не дом и не улица, мой адрес сегодня такой: www.ленинград-спб.ru3",
+  "address": "мой адрес не дом и не улица, мой адрес сегодня такой: www.ленинград-спб.ru",
   "positions": [
     {
       "product": 2,
@@ -64,7 +90,7 @@ Content-Type: application/json
 ###
 
 # обновляем записи на складе
-PATCH {{baseUrl}}/stocks/4/
+PATCH {{baseUrl}}/stocks/1/
 Content-Type: application/json
 
 {
@@ -84,6 +110,60 @@ Content-Type: application/json
 
 ###
 
-# поиск складов, где есть определенный продукт
-GET {{baseUrl}}/stocks/?products=2
+# обновляем запись с удалением позиции
+PATCH {{baseUrl}}/stocks/1/
+Content-Type: application/json
+
+{
+  "positions": [
+    {
+      "product": 2,
+      "quantity": 100,
+      "price": 130.80
+    }
+  ]
+}
+
+###
+
+# обновляем запись с добавлением позиции (НЕ ЗАБЫТЬ ЗАНОВО СОЗДАТЬ ПОМИДОР!)
+PATCH {{baseUrl}}/stocks/1/
+Content-Type: application/json
+
+{
+  "positions": [
+    {
+      "product": 2,
+      "quantity": 100,
+      "price": 130.80
+    },
+    {
+      "product": 3,
+      "quantity": 170,
+      "price": 120.80
+    },
+    {
+      "product": 4,
+      "quantity": 170,
+      "price": 120.80
+    }
+  ]
+}
+
+###
+
+# поиск складов, где есть определенный продукт (product.id)
+GET {{baseUrl}}/stocks/?products=3
+Content-Type: application/json
+
+###
+
+# поиск складов, где есть определенный продукт (product.title)
+GET {{baseUrl}}/stocks/?products=дор
+Content-Type: application/json
+
+###
+
+# поиск складов, где есть определенный продукт (product.description)
+GET {{baseUrl}}/stocks/?products=один
 Content-Type: application/json

@@ -15,6 +15,9 @@ class Stock(models.Model):
         related_name='stocks',
     )
 
+    def __str__(self):
+        return f'Stock: {self.address}'
+
 
 class StockProduct(models.Model):
     stock = models.ForeignKey(
@@ -33,3 +36,6 @@ class StockProduct(models.Model):
         decimal_places=2,
         validators=[MinValueValidator(0)],
     )
+
+    def __str__(self):
+        return f'{self.stock}\n{self.product}: {self.quantity}'
