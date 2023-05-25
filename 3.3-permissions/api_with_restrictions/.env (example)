@@ -1,0 +1,9 @@
+SECRET_KEY=z5^+-9&b+ok(d%hl!%lbft$$bd(yz$3g5cq_ch6pw5l#8+ap+-
+DEBUG=true
+ALLOWED_HOSTS=*
+
+POSTGRES_DB=netology_classified_ads
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=kay32463AC63jk6
+HOST=127.0.0.1
+PORT=5432

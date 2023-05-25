@@ -1,4 +1,6 @@
-django
+Django
+django-filter
 djangorestframework
 psycopg2-binary
-django-filter
+python-dotenv
+djangorestframework-simplejwt

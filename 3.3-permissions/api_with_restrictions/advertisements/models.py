@@ -16,15 +16,25 @@ class Advertisement(models.Model):
     description = models.TextField(default='')
     status = models.TextField(
         choices=AdvertisementStatusChoices.choices,
-        default=AdvertisementStatusChoices.OPEN
+        default=AdvertisementStatusChoices.OPEN,
     )
     creator = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
     )
     created_at = models.DateTimeField(
-        auto_now_add=True
+        auto_now_add=True,
     )
     updated_at = models.DateTimeField(
-        auto_now=True
+        auto_now=True,
     )
+    draft = models.BooleanField(default=False)
+
+
+class Favorite(models.Model):
+    """Избранные объявления."""
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='favorites')
+    advertisement = models.ForeignKey(Advertisement, on_delete=models.CASCADE, related_name='favorites')
+
+    class Meta:
+        unique_together = ('user', 'advertisement')

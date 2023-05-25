@@ -1,42 +1,213 @@
 # примеры API-запросов
+# TO GET TOKEN VARS SAVED IN HTTP-CLIENT ENV, EXECUTE python "manage.py create_test_users"
 
-@baseUrl = https://localhost:8000/api
+# создание объявлений
+POST {{baseUrl}}/advertisements/
+Content-Type: application/json
+Authorization: Token {{token1}}
+
+{
+  "title": "Продам: Шкаф IKEA",
+  "description": "Срочно"
+}
+###
+
+POST {{baseUrl}}/advertisements/
+Content-Type: application/json
+Authorization: Token {{token2}}
+
+{
+  "title": "Продам: Бензопилу STIHL",
+  "description": "Вся в крови"
+}
+###
+
+POST {{baseUrl}}/advertisements/
+Content-Type: application/json
+Authorization: Token {{token3}}
+
+{
+  "title": "Продам: LADA Калина",
+  "description": "Самовывоз"
+}
+###
+
+# попытка создания объявления неавторизованным пользователем
+POST {{baseUrl}}/advertisements/
+Content-Type: application/json
+
+{
+  "title": "Куплю: Печатную машинку",
+  "description": "Расплачусь чековой книжкой"
+}
+###
 
 # получение объявлений
 GET {{baseUrl}}/advertisements/
 Content-Type: application/json
-
 ###
 
-# создание объявления
-POST {{baseUrl}}/advertisements/
-Content-Type: application/json
-Authorization: Token 902ef055a9ac93f18327f1f9c45ab059f1a62c7d
-
-{
-  "title": "Шкаф IKEA",
-  "description": "Срочно"
-}
-
-###
-
-# попытка поменять объявление
+# изменеие своего объявления
 PATCH {{baseUrl}}/advertisements/1/
 Content-Type: application/json
-Authorization: Token 902ef055a9ac93f18327f1f9c45ab059f1a62c7d
+Authorization: Token {{token1}}
 
 {
   "status": "CLOSED"
 }
+###
 
+# попытка поменять чужое объявление
+PATCH {{baseUrl}}/advertisements/2/
+Content-Type: application/json
+Authorization: Token {{token1}}
+
+{
+  "status": "CLOSED"
+}
+###
+
+# попытка поменять объявление без аутентификации
+PATCH {{baseUrl}}/advertisements/2/
+Content-Type: application/json
+
+{
+  "status": "CLOSED"
+}
+###
+
+# удаление своего объявления
+DELETE {{baseUrl}}/advertisements/3/
+Content-Type: application/json
+Authorization: Token {{token3}}
+###
+
+# попытка удалить чужое объявление
+DELETE {{baseUrl}}/advertisements/2/
+Content-Type: application/json
+Authorization: Token {{token1}}
+###
+
+# попытка удаления без аутентификации
+DELETE {{baseUrl}}/advertisements/2/
+Content-Type: application/json
 ###
 
 # фильтрация по создателю
-GET {{baseUrl}}/advertisements/?creator=3
+GET {{baseUrl}}/advertisements/?creator=2
 Content-Type: application/json
-
 ###
 
-# фильтрация по дате
-GET {{baseUrl}}/advertisements/?created_at_before=2020-10-01
+# фильтрация по статусу
+GET {{baseUrl}}/advertisements/?status=CLOSED
 Content-Type: application/json
+###
+
+# фильтрация по дате (успех)
+GET {{baseUrl}}/advertisements/?created_at_after=2023-01-01
+Content-Type: application/json
+###
+
+# фильтрация по дате (провал)
+GET {{baseUrl}}/advertisements/?created_at_before=2023-01-01
+Content-Type: application/json
+###
+
+# фильтрация по дате интервал
+GET {{baseUrl}}/advertisements/?created_at_after=2023-01-01&created_at_before=2024-01-01
+Content-Type: application/json
+###
+
+# изменение чужого объявления (Админ)
+PATCH {{baseUrl}}/advertisements/2/
+Content-Type: application/json
+Authorization: Token {{adminToken}}
+
+{
+  "status": "CLOSED"
+}
+###
+
+# удаление чужого объявления (Админ)
+DELETE {{baseUrl}}/advertisements/2/
+Content-Type: application/json
+Authorization: Token {{adminToken}}
+###
+
+# добавление объявлений в "избранное"
+POST {{baseUrl}}/favorites/?adv=1
+Content-Type: application/json
+Authorization: Token {{token2}}
+###
+
+POST {{baseUrl}}/favorites/?adv=1
+Content-Type: application/json
+Authorization: Token {{token1}}
+###
+
+# попытка добавления несуществующего объявления в "избранное"
+POST {{baseUrl}}/favorites/?adv=2
+Content-Type: application/json
+Authorization: Token {{token2}}
+###
+
+# получение списка "избранное"
+GET {{baseUrl}}/favorites/
+Content-Type: application/json
+Authorization: Token {{token2}}
+###
+
+# получение списка "избранное" пользователем, который не добавлял объявлений в "избранное"
+GET {{baseUrl}}/favorites/
+Content-Type: application/json
+Authorization: Token {{token3}}
+###
+
+# попытка получения списка "избранное" неаутентифицированным пользователем
+GET {{baseUrl}}/favorites/
+Content-Type: application/json
+###
+
+# получение списка "избранное" админом (все пользователи)
+GET {{baseUrl}}/favorites/
+Content-Type: application/json
+Authorization: Token {{adminToken}}
+###
+
+# создание "черновика" объявления
+POST {{baseUrl}}/advertisements/
+Content-Type: application/json
+Authorization: Token {{token1}}
+
+{
+  "title": "Сделаю сайт на джанге.",
+  "description": "Но это не точно...",
+  "draft": true
+}
+###
+
+# просмотр объявлений юзером, создавшим "черновик" (должен отображаться)
+GET {{baseUrl}}/advertisements/
+Content-Type: application/json
+Authorization: Token {{token1}}
+###
+
+# просмотр объявлений пользователем, не создававшим "черновик" (не должен его видеть)
+GET {{baseUrl}}/advertisements/
+Content-Type: application/json
+Authorization: Token {{token2}}
+###
+
+# просмотр объявлений админом (видит всё)
+GET {{baseUrl}}/advertisements/
+Content-Type: application/json
+Authorization: Token {{adminToken}}
+###
+
+# просмотр объявлений анонимом (не должен видеть "черновики")
+GET {{baseUrl}}/advertisements/
+Content-Type: application/json
+###
+
+# SEND 11 POST REQUESTS IN A ROW TO CHECK THE 10 'OPEN' ADV's CONSTRAINT
+# SEND 11 NON-AUTHENTICATED(no token) OR 21 AUTHENTICATED REQUESTS PER MINUTE TO CHECK THE THROTTLING
