@@ -46,12 +46,24 @@ class AdvertisementSerializer(serializers.ModelSerializer):
     def validate(self, data):
         """Метод для валидации. Вызывается при создании и обновлении."""
 
-        queryset = Advertisement.objects.filter(
-            creator=self.context['request'].user,
-            status='OPEN'
-        )
-        if len(queryset) >= 10:
-            raise ValidationError("The limit of 10 open advertisements has been reached.")
+        def needs_quantity_validation():
+            """Функция определяет случаи, в которых нужно посчитать кол-во открытых объявлений"""
+            if self.context["request"].method == "POST":             # добавление нового объявления
+                return True
+            if self.context["request"].method in ["PUT", "PATCH"]:   # изменение существующего объявления
+                if self.instance.status == 'OPEN':
+                    return False                           # если статус уже "OPEN", то редактирование разрешено
+                if data.get('status', '') == 'OPEN':
+                    return True                            # если статус меняется на "OPEN", посчитать сколько всего
+            return False
+
+        if needs_quantity_validation():
+            queryset = Advertisement.objects.filter(
+                creator=self.context['request'].user,
+                status='OPEN'
+            )
+            if queryset.count() >= 10:
+                raise ValidationError("The limit of 10 open advertisements has been reached.")
 
         return data
 

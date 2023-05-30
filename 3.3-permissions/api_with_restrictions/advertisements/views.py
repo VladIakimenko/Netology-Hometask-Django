@@ -13,14 +13,13 @@ from advertisements.serializers import AdvertisementSerializer, FavoriteSerializ
 class AdvertisementViewSet(ModelViewSet):
     """ViewSet для объявлений."""
     serializer_class = AdvertisementSerializer
-    filterset_fields = ['creator', 'created_at', 'status']
     filterset_class = AdvertisementFilter
 
     def get_queryset(self):
         user = self.request.user
         if user.is_staff:
             queryset = Advertisement.objects.all()
-        elif isinstance(user, AnonymousUser):
+        elif user.is_anonymous:
             queryset = Advertisement.objects.filter(draft=False)
         else:
             queryset = Advertisement.objects.filter(
