@@ -1,0 +1,9 @@
+SECRET_KEY=oaamn^2=a4%p57jkt%&6rcird)lb6-#fo)^6rram7d+_@=8e38
+DEBUG=true
+ALLOWED_HOSTS=*
+
+POSTGRES_DB=netology_django_testing
+POSTGRES_USER=
+POSTGRES_PASSWORD=
+HOST=localhost
+PORT=5432
